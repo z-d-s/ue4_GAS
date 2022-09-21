@@ -8,6 +8,9 @@
 #include "Abilities/GameplayAbility.h"
 #include "CharacterBase.generated.h"
 
+class UAbilitySystemComponent;
+class UAttributeSetBase;
+
 UCLASS()
 class UE4_GAS_API ACharacterBase : public ACharacter, public IAbilitySystemInterface
 {
@@ -18,7 +21,7 @@ public:
 	ACharacterBase();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability")
-	class UAbilitySystemComponent* AbilitySystemComp;
+	UAbilitySystemComponent* AbilitySystemComp;
 
 protected:
 	// Called when the game starts or when spawned
@@ -32,6 +35,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Attribute")
+	UAttributeSetBase* AttributeComp;
 
 	UFUNCTION(BlueprintCallable, Category = "Ability")
 	void GetAbility(TSubclassOf<UGameplayAbility> Ability);
