@@ -9,7 +9,7 @@
 /**
  * 
  */
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAttributeChangedDelegate, float, Health, float, Maxhealth);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAttributeChangedDelegate, float, Value, float, MaxValue);
 
 UCLASS()
 class UE4_GAS_API UAttributeSetBase : public UAttributeSet
@@ -25,8 +25,26 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttributeSet")
 	FGameplayAttributeData MaxHealth;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttributeSet")
+	FGameplayAttributeData Mana;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttributeSet")
+	FGameplayAttributeData MaxMana;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttributeSet")
+	FGameplayAttributeData Energy;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttributeSet")
+	FGameplayAttributeData MaxEnergy;
+
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
 	UPROPERTY(BlueprintAssignable)
 	FOnAttributeChangedDelegate OnHpChanged;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnAttributeChangedDelegate OnMpChanged;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnAttributeChangedDelegate OnEnergyChanged;
 };
