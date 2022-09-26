@@ -20,9 +20,6 @@ public:
 	// Sets default values for this character's properties
 	ACharacterBase();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability")
-	UAbilitySystemComponent* AbilitySystemComp;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -34,10 +31,13 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability")
+	UAbilitySystemComponent* AbilitySystemComp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Attribute")
 	UAttributeSetBase* AttributeComp;
+
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Ability")
 	void GetAbility(TSubclassOf<UGameplayAbility> Ability);
