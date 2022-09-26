@@ -41,4 +41,13 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Ability")
 	void GetAbility(TSubclassOf<UGameplayAbility> Ability);
+
+	UFUNCTION(BlueprintCallable, Category = "CharacterBase")
+	void AddGameplayTag(FGameplayTag& TagToAdd);
+
+	UFUNCTION(BlueprintCallable, Category = "CharacterBase")
+	void RemoveGameplayTag(FGameplayTag& TagToRemove);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CharacterBase")
+	FGameplayTag FullHealthTag;
 };

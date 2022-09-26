@@ -20,6 +20,7 @@ void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	AddGameplayTag(FullHealthTag);
 }
 
 // Called every frame
@@ -48,5 +49,16 @@ void ACharacterBase::GetAbility(TSubclassOf<UGameplayAbility> Ability)
 		AbilitySystemComp->GiveAbility(FGameplayAbilitySpec(Ability, 1));
 		AbilitySystemComp->InitAbilityActorInfo(this, this);
 	}
+}
+
+void ACharacterBase::AddGameplayTag(FGameplayTag& TagToAdd)
+{
+	GetAbilitySystemComponent()->AddLooseGameplayTag(TagToAdd);
+	GetAbilitySystemComponent()->SetTagMapCount(TagToAdd, 1);
+}
+
+void ACharacterBase::RemoveGameplayTag(FGameplayTag& TagToRemove)
+{
+	GetAbilitySystemComponent()->RemoveLooseGameplayTag(TagToRemove);
 }
 
