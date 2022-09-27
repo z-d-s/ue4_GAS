@@ -13,6 +13,7 @@ ACharacterBase::ACharacterBase()
 
 	AbilitySystemComp = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComp"));
 	AttributeComp = CreateDefaultSubobject<UAttributeSetBase>(TEXT("AttributeComp"));
+	TeamID = 255;
 }
 
 // Called when the game starts or when spawned
@@ -20,6 +21,7 @@ void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	AutoDeterminTeamIDByControllerType();
 	AddGameplayTag(FullHealthTag);
 }
 
@@ -60,5 +62,23 @@ void ACharacterBase::AddGameplayTag(FGameplayTag& TagToAdd)
 void ACharacterBase::RemoveGameplayTag(FGameplayTag& TagToRemove)
 {
 	GetAbilitySystemComponent()->RemoveLooseGameplayTag(TagToRemove);
+}
+
+bool ACharacterBase::IsOtherHostile(ACharacterBase* Other)
+{
+	return TeamID != Other->GetTeamID();
+}
+
+uint8 ACharacterBase::GetTeamID() const
+{
+	return TeamID;
+}
+
+void ACharacterBase::AutoDeterminTeamIDByControllerType()
+{
+	if (GetController() && GetController()->IsPlayerController())
+	{
+		TeamID = 0;
+	}
 }
 

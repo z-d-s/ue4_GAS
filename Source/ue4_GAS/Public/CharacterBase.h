@@ -48,6 +48,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "CharacterBase")
 	void RemoveGameplayTag(FGameplayTag& TagToRemove);
 
+	UFUNCTION(BlueprintCallable, Category = "CharacterBase")
+	bool IsOtherHostile(ACharacterBase* Other);
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CharacterBase")
 	FGameplayTag FullHealthTag;
+
+protected:
+	uint8 TeamID;
+	uint8 GetTeamID() const;
+	void AutoDeterminTeamIDByControllerType();
 };
