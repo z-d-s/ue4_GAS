@@ -81,4 +81,3 @@ void ACharacterBase::AutoDeterminTeamIDByControllerType()
 		TeamID = 0;
 	}
 }
-
