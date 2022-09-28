@@ -8,6 +8,12 @@
 
 class UGameplayAbilityBase;
 
+UCLASS()
+class UE4_GAS_API AAbilityTypes : public AActor
+{
+	GENERATED_BODY()
+};
+
 UENUM(BlueprintType)
 enum class EAbilityCostType : uint8
 {
